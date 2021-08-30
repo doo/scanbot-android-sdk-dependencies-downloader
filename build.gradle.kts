@@ -94,7 +94,9 @@ tasks.create("fetchDeps", Copy::class.java) {
                     val aarEntry = aarEntries.nextElement()
                     if (aarEntry.name == "AndroidManifest.xml") {
                         return@filterNot aarFile.getInputStream(aarEntry).reader().readLines().any { manifestLine ->
-                            manifestLine.contains("io.scanbot")
+                            manifestLine.contains("package=\"io.scanbot")
+                                  || manifestLine.contains("package=\"crl.android.pdfwriter")
+                                  || manifestLine.contains("package=\"com.commonsware.cwac.camera")
                         }
                     }
                 }
