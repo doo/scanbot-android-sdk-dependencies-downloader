@@ -101,5 +101,7 @@ tasks.create("fetchDeps", Copy::class.java) {
                 false
             }?.forEach { it.delete() }
         }
+
+        println("\nSUCCESS!\nDependencies artifacts were downloaded to file://${depsDirFile.absolutePath}")
     }
 }
