@@ -15,24 +15,31 @@ repositories {
 
 val defaultScanbotSdkVersion = "1.86.0"
 
+val sdkVersion: String
+    get() {
+        val version = (project.findProperty("version") as? String) ?: defaultScanbotSdkVersion
+        return if (version == "unspecified") {
+            defaultScanbotSdkVersion
+        } else {
+            version
+        }
+    }
+
 // This is a full set of Scanbot SDK artifacts. For simplicity unused ones can be commented/deleted.
 dependencies {
-    implementation("io.scanbot:sdk-package-4:$defaultScanbotSdkVersion") { isChanging = true }
-    implementation("io.scanbot:sdk-package-ui:$defaultScanbotSdkVersion") { isChanging = true }
-    implementation("io.scanbot:sdk-ml-docdetector:$defaultScanbotSdkVersion") { isChanging = true }
-    implementation("io.scanbot:sdk-idcard-assets:$defaultScanbotSdkVersion") { isChanging = true }
-    implementation("io.scanbot:sdk-barcode-assets:$defaultScanbotSdkVersion") { isChanging = true }
-    implementation("io.scanbot:sdk-dc-assets:$defaultScanbotSdkVersion") { isChanging = true }
-    implementation("io.scanbot:sdk-genericdocument-assets:$defaultScanbotSdkVersion") { isChanging = true }
-    implementation("io.scanbot:sdk-generictext-assets:$defaultScanbotSdkVersion") { isChanging = true }
-    implementation("io.scanbot:sdk-licenseplate-assets:$defaultScanbotSdkVersion") { isChanging = true }
-    implementation("io.scanbot:sdk-ml-imageprocessor-assets:$defaultScanbotSdkVersion") { isChanging = true }
+    implementation("io.scanbot:sdk-package-4:$sdkVersion") { isChanging = true }
+    implementation("io.scanbot:sdk-package-ui:$sdkVersion") { isChanging = true }
+    implementation("io.scanbot:sdk-ml-docdetector:$sdkVersion") { isChanging = true }
+    implementation("io.scanbot:sdk-idcard-assets:$sdkVersion") { isChanging = true }
+    implementation("io.scanbot:sdk-barcode-assets:$sdkVersion") { isChanging = true }
+    implementation("io.scanbot:sdk-dc-assets:$sdkVersion") { isChanging = true }
+    implementation("io.scanbot:sdk-genericdocument-assets:$sdkVersion") { isChanging = true }
+    implementation("io.scanbot:sdk-generictext-assets:$sdkVersion") { isChanging = true }
+    implementation("io.scanbot:sdk-licenseplate-assets:$sdkVersion") { isChanging = true }
+    implementation("io.scanbot:sdk-ml-imageprocessor-assets:$sdkVersion") { isChanging = true }
 }
 
 val DEPENDENCIES_FOLDER_NAME = "deps-plain"
-
-val sdkVersion: String
-    get() = (project.findProperty("sdkVersion") ?: defaultScanbotSdkVersion) as String
 
 val isFull: Boolean
     get() = project.hasProperty("full")
