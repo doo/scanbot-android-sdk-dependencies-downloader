@@ -53,4 +53,8 @@ For example, to print all dependencies for version 1.86.0 the command would look
 
 ### License
 
-TODO
+The license for this repository is specified in the [LICENSE.txt](LICENSE.txt) file.
+
+The [Scanbot SDK](https://scanbot.io) is a commercial product and requires a separate proprietary license.
+Please contact us via sdk@scanbot.io for more information.
+
