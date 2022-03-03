@@ -13,7 +13,7 @@ repositories {
     maven(url = "https://nexus.scanbot.io/nexus/content/repositories/releases/")
 }
 
-val defaultScanbotSdkVersion = "1.86.0"
+val defaultScanbotSdkVersion = "1.92.0"
 
 val sdkVersion: String
     get() {
@@ -32,6 +32,8 @@ dependencies {
     implementation("io.scanbot:sdk-ml-docdetector:$sdkVersion") { isChanging = true }
     implementation("io.scanbot:sdk-barcode-assets:$sdkVersion") { isChanging = true }
     implementation("io.scanbot:sdk-mc-assets:$sdkVersion") { isChanging = true }
+    implementation("io.scanbot:sdk-ehic-assets:$sdkVersion") { isChanging = true }
+    implementation("io.scanbot:sdk-blur-assets:$sdkVersion") { isChanging = true }
     implementation("io.scanbot:sdk-genericdocument-assets:$sdkVersion") { isChanging = true }
     implementation("io.scanbot:sdk-generictext-assets:$sdkVersion") { isChanging = true }
     implementation("io.scanbot:sdk-licenseplate-assets:$sdkVersion") { isChanging = true }
