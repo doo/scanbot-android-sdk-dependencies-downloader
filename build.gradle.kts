@@ -27,12 +27,11 @@ val sdkVersion: String
 
 // This is a full set of Scanbot SDK artifacts. For simplicity unused ones can be commented/deleted.
 dependencies {
-    implementation("io.scanbot:sdk-package-4:$sdkVersion") { isChanging = true }
+    implementation("io.scanbot:sdk-package-4:$sdkVersion") { isChanging = true } // use required package as needed, e.g. `io.scanbot:sdk-package-1`
     implementation("io.scanbot:sdk-package-ui:$sdkVersion") { isChanging = true }
     implementation("io.scanbot:sdk-ml-docdetector:$sdkVersion") { isChanging = true }
-    implementation("io.scanbot:sdk-idcard-assets:$sdkVersion") { isChanging = true }
     implementation("io.scanbot:sdk-barcode-assets:$sdkVersion") { isChanging = true }
-    implementation("io.scanbot:sdk-dc-assets:$sdkVersion") { isChanging = true }
+    implementation("io.scanbot:sdk-mc-assets:$sdkVersion") { isChanging = true }
     implementation("io.scanbot:sdk-genericdocument-assets:$sdkVersion") { isChanging = true }
     implementation("io.scanbot:sdk-generictext-assets:$sdkVersion") { isChanging = true }
     implementation("io.scanbot:sdk-licenseplate-assets:$sdkVersion") { isChanging = true }
