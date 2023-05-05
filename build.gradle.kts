@@ -13,31 +13,43 @@ repositories {
     maven(url = "https://nexus.scanbot.io/nexus/content/repositories/releases/")
 }
 
-val defaultScanbotSdkVersion = "1.92.0"
+val defaultScanbotSdkVersion = "2.2.0"
 
-val sdkVersion: String
-    get() {
-        val version = (project.findProperty("version") as? String) ?: defaultScanbotSdkVersion
-        return if (version == "unspecified") {
-            defaultScanbotSdkVersion
-        } else {
-            version
-        }
+val sdkVersion: String by lazy {
+    val version = (project.findProperty("version") as? String) ?: defaultScanbotSdkVersion
+    if (version == "unspecified") {
+        defaultScanbotSdkVersion
+    } else {
+        version
     }
+}
 
 // This is a full set of Scanbot SDK artifacts. For simplicity unused ones can be commented/deleted.
 dependencies {
+    val isSdkV_2_2_0_OrLater = sdkVersion.startsWith("2.") && sdkVersion[2].digitToInt() >= 2
+    val barcodeAssetsDependency = if (isSdkV_2_2_0_OrLater) {
+        "io.scanbot:bundle-sdk-barcode-assets:$sdkVersion"
+    } else {
+        "io.scanbot:sdk-barcode-assets:$sdkVersion"
+    }
+    val cryptoModuleArtifactId = "sdk-crypto-persistence".run { if (isSdkV_2_2_0_OrLater) "bundle-$this" else this }
+
     implementation("io.scanbot:sdk-package-4:$sdkVersion") { isChanging = true } // use required package as needed, e.g. `io.scanbot:sdk-package-1`
     implementation("io.scanbot:sdk-package-ui:$sdkVersion") { isChanging = true }
-    implementation("io.scanbot:sdk-ml-docdetector:$sdkVersion") { isChanging = true }
-    implementation("io.scanbot:sdk-barcode-assets:$sdkVersion") { isChanging = true }
+    implementation(barcodeAssetsDependency) { isChanging = true }
     implementation("io.scanbot:sdk-mc-assets:$sdkVersion") { isChanging = true }
     implementation("io.scanbot:sdk-ehic-assets:$sdkVersion") { isChanging = true }
     implementation("io.scanbot:sdk-blur-assets:$sdkVersion") { isChanging = true }
+    if (isSdkV_2_2_0_OrLater) {
+        implementation("io.scanbot:sdk-mrz-assets:$sdkVersion") { isChanging = true }
+    } else {
+        implementation("io.scanbot:sdk-ml-docdetector:$sdkVersion") { isChanging = true }
+    }
     implementation("io.scanbot:sdk-genericdocument-assets:$sdkVersion") { isChanging = true }
     implementation("io.scanbot:sdk-generictext-assets:$sdkVersion") { isChanging = true }
     implementation("io.scanbot:sdk-licenseplate-assets:$sdkVersion") { isChanging = true }
     implementation("io.scanbot:sdk-ml-imageprocessor-assets:$sdkVersion") { isChanging = true }
+    implementation("io.scanbot:$cryptoModuleArtifactId:$sdkVersion") { isChanging = true }
 }
 
 val DEPENDENCIES_FOLDER_NAME = "deps-plain"
@@ -71,10 +83,8 @@ tasks.create("printDeps") {
         println("\n\tDependencies required by Scanbot SDK:\n")
         transitiveDependencies.forEach { println(it) }
 
-        if (isFull) {
-            println("\n\n\tScanbot SDK dependencies:\n")
-            scanbotDependencies.forEach { println(it) }
-        }
+        println("\n\n\tScanbot SDK dependencies:\n")
+        scanbotDependencies.forEach { println(it) }
     }
 }
 
