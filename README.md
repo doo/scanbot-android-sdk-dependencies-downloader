@@ -30,12 +30,12 @@ cd ~/my_projects_folder/scanbot-android-sdk-dependencies-downloader
 ```
 
 It offers the following params:
- - `version`: version of Scanbot SDK to download. Currently, defaults to 1.86.0
+ - `version`: version of Scanbot SDK to download. Currently, defaults to 2.2.0
  - flag `full`: defines whether to download all dependencies, including transitive, or only ScanbotSDK artifacts. Omitted by default.
 
-For example, to download all artifacts for version 1.86.0 the command would look like:
+For example, to download all artifacts for version 2.2.0 the command would look like:
 
-`./gradlew fetchDeps -Pversion=1.86.0 -Pfull`
+`./gradlew fetchDeps -Pversion=2.2.0 -Pfull`
 
 ### Printing dependencies
 
@@ -43,13 +43,11 @@ Additional information might help you resolve dependencies conflicts. To obtain 
 
 `./gradlew printDeps`
 
-It offers the following params:
-- `version`: version of Scanbot SDK to download. Currently, defaults to 1.86.0
-- flag `full`: defines whether to also show Scanbot SDK dependencies, or only transitive ones. Omitted by default.
+It offers param `version` - version of Scanbot SDK to download. Currently, defaults to 2.2.0.
 
-For example, to print all dependencies for version 1.86.0 the command would look like:
+For example, to print all dependencies for version 2.2.0 the command would look like:
 
-`./gradlew printDeps -Pversion=1.86.0 -Pfull`
+`./gradlew printDeps -Pversion=2.2.0`
 
 ### License
 
@@ -57,4 +55,3 @@ The license for this repository is specified in the [LICENSE.txt](LICENSE.txt) f
 
 The [Scanbot SDK](https://scanbot.io) is a commercial product and requires a separate proprietary license.
 Please contact us via sdk@scanbot.io for more information.
-
